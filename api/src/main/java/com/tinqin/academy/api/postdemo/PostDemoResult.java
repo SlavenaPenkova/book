@@ -1,4 +1,4 @@
-package com.tinqin.academy.api.hello;
+package com.tinqin.academy.api.postdemo;
 
 import com.tinqin.academy.api.base.ProcessorResult;
 import lombok.AllArgsConstructor;
@@ -8,6 +8,6 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
-public class HelloWorldResult implements ProcessorResult{
-    private String message;
+public class PostDemoResult implements ProcessorResult{
+    private String resultMessage;
 }
