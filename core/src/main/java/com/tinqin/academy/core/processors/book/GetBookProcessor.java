@@ -1,4 +1,4 @@
-package com.tinqin.academy.core.processors.hello;
+package com.tinqin.academy.core.processors.book;
 
 import com.tinqin.academy.api.operations.getbook.GetBook;
 import com.tinqin.academy.api.operations.getbook.GetBookInput;
@@ -6,7 +6,6 @@ import com.tinqin.academy.api.operations.getbook.GetBookOutput;
 import com.tinqin.academy.persistence.models.Book;
 import com.tinqin.academy.persistence.repositories.BookRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -26,7 +25,8 @@ public class GetBookProcessor implements GetBook {
     }
 
     private Book fetchBook(GetBookInput input) {
-        return bookRepository.findById(UUID.fromString(input.getBookId())).orElse(null);
+        return bookRepository.findById(UUID.fromString(input.getBookId()))
+                .orElseThrow(()-> new RuntimeException("Book not found"));
 
     }
 

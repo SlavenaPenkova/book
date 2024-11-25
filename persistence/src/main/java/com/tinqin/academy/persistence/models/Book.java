@@ -4,6 +4,7 @@ import com.tinqin.academy.persistence.enums.BookStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -22,8 +23,8 @@ public class Book {
 @Column(name = "id", nullable = false)
 private UUID id;
 
-@Column(name = "author", nullable = false)
-    private String author;
+@ManyToOne(fetch = FetchType.EAGER)
+    private Author author;
 
 @Column(name = "title", nullable = false)
 private String title;
@@ -32,7 +33,7 @@ private String title;
 private String pages;
 
 @Column(name = "price", nullable = false)
-private Double price;
+private BigDecimal price;
 
 @Column(name = "price_rental", nullable = false)
 private Double pricePerRental;
