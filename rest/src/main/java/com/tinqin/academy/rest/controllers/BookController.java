@@ -1,18 +1,15 @@
 package com.tinqin.academy.rest.controllers;
 
 import com.tinqin.academy.api.APIRoutes;
-import com.tinqin.academy.api.hello.HelloWorld;
-import com.tinqin.academy.api.hello.HelloWorldInput;
-import com.tinqin.academy.api.hello.HelloWorldResult;
 import com.tinqin.academy.api.operations.createbook.CreateBook;
 import com.tinqin.academy.api.operations.createbook.CreateBookInput;
 import com.tinqin.academy.api.operations.createbook.CreateBookOutput;
 import com.tinqin.academy.api.operations.getbook.GetBook;
 import com.tinqin.academy.api.operations.getbook.GetBookInput;
 import com.tinqin.academy.api.operations.getbook.GetBookOutput;
-import com.tinqin.academy.api.operations.querybook.QueryBook;
-import com.tinqin.academy.api.operations.querybook.QueryBookInput;
-import com.tinqin.academy.api.operations.querybook.QueryBookOutput;
+//import com.tinqin.academy.api.operations.querybook.QueryBook;
+//import com.tinqin.academy.api.operations.querybook.QueryBookInput;
+//import com.tinqin.academy.api.operations.querybook.QueryBookOutput;
 import com.tinqin.academy.api.postdemo.PostDemo;
 import com.tinqin.academy.api.postdemo.PostDemoInput;
 import com.tinqin.academy.api.postdemo.PostDemoResult;
@@ -23,14 +20,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.Query;
-
 @RequiredArgsConstructor
 @RestController
 public class BookController {
 
     private final GetBook getBook;
-    private final QueryBook queryBook;
+    //private final QueryBook queryBook;
     //private final HelloWorld helloWorld;
     private final QueryDemo queryDemo;
     private final PostDemo postDemo;
@@ -52,7 +47,7 @@ public class BookController {
         }
 
     }
-
+/*
     @GetMapping(APIRoutes.API_BOOK)
     public ResponseEntity<?> getBooks(
             @RequestParam(value = "title", required = false, defaultValue = "") String title,
@@ -72,7 +67,7 @@ public class BookController {
         }
 
     }
-
+*/
     @PostMapping(APIRoutes.API_BOOK)
     public ResponseEntity<?> createBook(@RequestBody CreateBookInput input) {
         CreateBookOutput result = createBook.process(input);
