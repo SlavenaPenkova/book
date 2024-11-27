@@ -1,0 +1,6 @@
+/.idea/
+**/target/
+**/.flattened-pom.xml
+spring.log*
+*.json
+/logs

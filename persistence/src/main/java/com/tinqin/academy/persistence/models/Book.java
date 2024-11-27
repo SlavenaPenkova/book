@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -19,7 +20,7 @@ import org.hibernate.annotations.CreationTimestamp;
 public class Book {
 
     @Builder
-    public Book(String title, Author author, String pages, BigDecimal price) {
+    public Book(String title, List<Author> author, String pages, BigDecimal price) {
         this.title = title;
         this.pages = pages;
         this.price = price;
@@ -38,8 +39,16 @@ public class Book {
 @Column(name = "id", nullable = false)
 private UUID id;
 
-@ManyToOne(fetch = FetchType.EAGER)
-    private Author author;
+//@ManyToOne(fetch = FetchType.EAGER)
+//    private Author author;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "books_authors",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id")
+    )
+    private List<Author> author;
 
 @Column(name = "title", nullable = false)
 private String title;
