@@ -1,6 +1,7 @@
 package com.tinqin.academy.persistence.models;
 
 import com.tinqin.academy.persistence.enums.BookStatus;
+import io.vavr.control.Try;
 import jakarta.persistence.*;
 import lombok.*;
 

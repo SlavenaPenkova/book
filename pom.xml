@@ -22,6 +22,7 @@
 		<flatten-pom.version>1.2.7</flatten-pom.version>
 		<swagger.version>2.6.0</swagger.version>
 		<spring-starter.version>3.3.5</spring-starter.version>
+		<vavr.version>0.10.4</vavr.version>
 	</properties>
     <modules>
         <module>api</module>
@@ -50,6 +51,12 @@
             <version>${spring-starter.version}</version>
             <scope>test</scope>
         </dependency>
+
+		<dependency>
+			<groupId>io.vavr</groupId>
+			<artifactId>vavr</artifactId>
+			<version>${vavr.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
