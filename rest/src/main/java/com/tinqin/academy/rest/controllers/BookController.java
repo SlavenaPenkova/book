@@ -1,6 +1,7 @@
 package com.tinqin.academy.rest.controllers;
 
 import com.tinqin.academy.api.APIRoutes;
+import com.tinqin.academy.api.errors.OperationError;
 import com.tinqin.academy.api.operations.createbook.CreateBook;
 import com.tinqin.academy.api.operations.createbook.CreateBookInput;
 import com.tinqin.academy.api.operations.createbook.CreateBookOutput;
@@ -15,6 +16,8 @@ import com.tinqin.academy.api.postdemo.PostDemoInput;
 import com.tinqin.academy.api.postdemo.PostDemoResult;
 import com.tinqin.academy.api.querydemo.QueryDemo;
 import com.tinqin.academy.api.querydemo.QueryDemoInput;
+import io.swagger.v3.oas.annotations.Operation;
+import io.vavr.control.Either;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,7 +26,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-public class BookController {
+//public class BookController {
+public class BookController extends BaseController {
 
     private final GetBook getBook;
     //private final QueryBook queryBook;
@@ -34,18 +38,26 @@ public class BookController {
 
 
     @GetMapping(APIRoutes.GET_BOOK)
+    @Operation(  summary = "Get book",
+            description = "Get book by UUID and return OK")
     public ResponseEntity<?> getBook(@PathVariable("bookId") String bookId) {
 
         GetBookInput input = GetBookInput
                 .builder()
                 .bookId(bookId)
                 .build();
-        try {
-            GetBookOutput result = getBook.process(input);
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+
+        Either<OperationError,GetBookOutput> result = getBook.process(input);
+
+        return mapToResponseEntity(result,HttpStatus.OK);
+
+//no vavr
+//        try {
+//            GetBookOutput result = getBook.process(input);
+//            return new ResponseEntity<>(result, HttpStatus.OK);
+//        } catch (RuntimeException e) {
+//            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+//        }
 
     }
 /*
@@ -70,15 +82,25 @@ public class BookController {
     }
 */
     @PostMapping(APIRoutes.API_BOOK)
+    @Operation(  summary = "Create a book",
+            description = "Create a book and return response")
     public ResponseEntity<?> createBook(@Valid @RequestBody CreateBookInput input) {
-        CreateBookOutput result = createBook.process(input);
 
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+        Either<OperationError,CreateBookOutput> result =createBook.process(input);
+
+        return mapToResponseEntity(result,HttpStatus.CREATED);
+
+ //no vavr
+//        CreateBookOutput result = createBook.process(input);
+//
+//        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     //Demo TEST
 
     @GetMapping
+    @Operation(  summary = "Query demo",
+            description = "Query demo of params")
     public ResponseEntity<?> queryDemo(@RequestParam(value = "myparam", required = false, defaultValue = "Hello") String queryParam,
                                        @RequestParam(value = "param2", required = true) String queryParam2) {
 
@@ -94,10 +116,15 @@ public class BookController {
     }
 
     @PostMapping
+    @Operation(  summary = "Post demo",
+            description = "Post demo and return OK")
     public ResponseEntity<?> postDemo(@RequestBody PostDemoInput postDemoInput) {
 
-        PostDemoResult process = postDemo.process(postDemoInput);
-        return ResponseEntity.ok(postDemoInput);
+        Either<OperationError,PostDemoResult> result =postDemo.process(postDemoInput);
+        return mapToResponseEntity(result,HttpStatus.OK);
+//no vavr
+//        PostDemoResult process = postDemo.process(postDemoInput);
+//        return ResponseEntity.ok(postDemoInput);
     }
 
 }
