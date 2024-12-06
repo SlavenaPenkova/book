@@ -1,0 +1,30 @@
+[
+{
+"title":"Germany dirty story",
+"pages": 500,
+"price": 20.00,
+"authorFirstName": "Victor",
+"authorlastName":"Paskov"
+},
+{
+"title":"Authopsy of a love",
+"pages": 300,
+"price": 25.00,
+"authorFirstName": "Victor",
+"authorlastName":"Paskov"
+},
+{
+"title":"Balad for Georg Henig",
+"pages": 100,
+"price": 15.00,
+"authorFirstName": "Victor",
+"authorlastName":"Paskov"
+},
+{
+"title":"The myth of normal",
+"pages": 500,
+"price": 35.00,
+"authorFirstName": "Gabor",
+"authorlastName":"Mate"
+}
+]
