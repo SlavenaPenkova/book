@@ -17,9 +17,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.List;
 
-//@Component
+@Component
 @RequiredArgsConstructor
-//@Order(2)
+@Order(2)
 public class BookSeederVersionFileReader implements ApplicationRunner{
 
         @Value("${spring.datasource.url}")
@@ -56,7 +56,8 @@ public class BookSeederVersionFileReader implements ApplicationRunner{
 
             PreparedStatement ps = connection.prepareStatement(BOOKS_QUERY);
 
-            FileReader fileReader = FileReader.loadFile("rest/src/main/resources/book.csv", 2);
+           // FileReader fileReader = FileReader.loadFile("rest/src/main/resources/book.csv", 2);
+            FileReader fileReader = FileReader.loadFile("book.csv", 2);
             List<BookModel> batch = fileReader.getBatch();
 
             while(!batch.isEmpty()) {

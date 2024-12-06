@@ -17,9 +17,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 
-@Component
+//@Component
 @RequiredArgsConstructor
-@Order(2)
+//@Order(2)
 public class BookSeederFileReaderFactory implements ApplicationRunner {
     private final FileReaderFactory fileReaderFactory;
 
