@@ -45,5 +45,10 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "secret_question")
+    private String secret_question;
+
+    @Column(name = "secret_answer")
+    private String secret_answer;
 
 }

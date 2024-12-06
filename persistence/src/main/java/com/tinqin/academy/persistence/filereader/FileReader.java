@@ -1,6 +1,7 @@
 package com.tinqin.academy.persistence.filereader;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.PathResource;
 
 import java.io.BufferedReader;
@@ -25,7 +26,7 @@ public class FileReader {
 
     public static FileReader loadFile(String path, Integer batchSize) {
         try {
-            InputStream pathResource = new PathResource(path).getInputStream();
+            InputStream pathResource = new ClassPathResource(path).getInputStream();
             InputStreamReader inputStreamReader = new InputStreamReader(pathResource);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 

@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.3.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
+
 	</parent>
 	<groupId>com.tinqin.academy</groupId>
 	<artifactId>book</artifactId>
@@ -23,6 +23,7 @@
 		<swagger.version>2.6.0</swagger.version>
 		<spring-starter.version>3.3.5</spring-starter.version>
 		<vavr.version>0.10.4</vavr.version>
+		<flayway.version>9.0.0</flayway.version>
 	</properties>
     <modules>
         <module>api</module>
@@ -56,6 +57,12 @@
 			<groupId>io.vavr</groupId>
 			<artifactId>vavr</artifactId>
 			<version>${vavr.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>${flayway.version}</version>
 		</dependency>
 
 		<dependency>
