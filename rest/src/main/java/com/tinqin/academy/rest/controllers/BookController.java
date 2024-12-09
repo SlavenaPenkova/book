@@ -11,6 +11,9 @@ import com.tinqin.academy.api.operations.getbook.GetBookOutput;
 //import com.tinqin.academy.api.operations.querybook.QueryBook;
 //import com.tinqin.academy.api.operations.querybook.QueryBookInput;
 //import com.tinqin.academy.api.operations.querybook.QueryBookOutput;
+import com.tinqin.academy.api.operations.getbookbyauthor.GetBookByAuthor;
+import com.tinqin.academy.api.operations.getbookbyauthor.GetBookByAuthorInput;
+import com.tinqin.academy.api.operations.getbookbyauthor.GetBookByAuthorOutput;
 import com.tinqin.academy.api.postdemo.PostDemo;
 import com.tinqin.academy.api.postdemo.PostDemoInput;
 import com.tinqin.academy.api.postdemo.PostDemoResult;
@@ -20,6 +23,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.vavr.control.Either;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +40,7 @@ public class BookController extends BaseController {
     private final QueryDemo queryDemo;
     private final PostDemo postDemo;
     private final CreateBook createBook;
+    private final GetBookByAuthor getBookByAuthor;
 
 
     @GetMapping(APIRoutes.GET_BOOK)
@@ -94,6 +100,22 @@ public class BookController extends BaseController {
 //        CreateBookOutput result = createBook.process(input);
 //
 //        return new ResponseEntity<>(result, HttpStatus.CREATED);
+    }
+
+    //GetBookByAuthor
+    @GetMapping(APIRoutes.API_BOOK)
+    public ResponseEntity<?> getBooksByAuthor(@RequestParam("authorId") String authorId,
+                                              @PageableDefault(page = 0, size = 2) Pageable pageable) {
+
+        GetBookByAuthorInput input = GetBookByAuthorInput
+                .builder()
+                .authorId(authorId)
+                .pageable(pageable)
+                .build();
+
+        Either<OperationError, GetBookByAuthorOutput> process = getBookByAuthor.process(input);
+
+        return mapToResponseEntity(process, HttpStatus.OK);
     }
 
     //Demo TEST

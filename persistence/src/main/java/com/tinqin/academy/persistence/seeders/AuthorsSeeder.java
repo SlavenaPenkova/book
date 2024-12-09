@@ -30,6 +30,11 @@ public class AuthorsSeeder implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
+        Integer authorCount = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM authors", Integer.class);
+        if (authorCount > 0) {
+            return;
+        }
+
         String names = authors
                 .stream()
                 .map(author -> author.split(" "))
