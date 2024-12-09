@@ -46,7 +46,7 @@ public class GetBookByAuthorProcessor implements GetBookByAuthor {
                             .stream()
                             .map(bookEntity -> conversionService.convert(bookEntity, BookModel.class))
                             .toList();
-                    PageRequest.of(0,2, (Sort)Sort.by(Sort.Order.desc("title")).and(Sort.Order.desc("createdAt")));
+                    //PageRequest.of(0,2, (Sort)Sort.by(Sort.Order.desc("title")).and(Sort.Order.desc("createdAt")));
                     return GetBookByAuthorOutput.builder()
                             .books(bookModels)
                             .build();
