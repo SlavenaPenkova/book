@@ -19,6 +19,7 @@ import com.tinqin.academy.api.postdemo.PostDemoInput;
 import com.tinqin.academy.api.postdemo.PostDemoResult;
 import com.tinqin.academy.api.querydemo.QueryDemo;
 import com.tinqin.academy.api.querydemo.QueryDemoInput;
+import com.tinqin.academy.rest.models.LocaleHeader;
 import io.swagger.v3.oas.annotations.Operation;
 import io.vavr.control.Either;
 import jakarta.validation.Valid;
@@ -41,16 +42,18 @@ public class BookController extends BaseController {
     private final PostDemo postDemo;
     private final CreateBook createBook;
     private final GetBookByAuthor getBookByAuthor;
+    private final LocaleHeader localeHeader;
 
 
     @GetMapping(APIRoutes.GET_BOOK)
     @Operation(  summary = "Get book",
             description = "Get book by UUID and return OK")
     public ResponseEntity<?> getBook(@PathVariable("bookId") String bookId) {
-
+        //@RequestHeader(value = "locale", required = false, defaultValue = "en") String locale) {
         GetBookInput input = GetBookInput
                 .builder()
                 .bookId(bookId)
+                .locale(localeHeader.getLocale())
                 .build();
 
         Either<OperationError,GetBookOutput> result = getBook.process(input);
